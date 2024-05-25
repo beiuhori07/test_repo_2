@@ -13,7 +13,7 @@ public class SimpleRestController {
 
   private static final Logger logger = LoggerFactory.getLogger("ayooo");
 
-  @GetMapping("/check")
+  @GetMapping("/health")
   public String healthCheck() {
     return "Server is running!";
   }
