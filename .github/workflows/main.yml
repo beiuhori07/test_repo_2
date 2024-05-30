@@ -17,8 +17,10 @@ jobs:
       run: |
           echo "Repository: $GITHUB_REPOSITORY"
           echo "TOKEN: ${{ secrets.GITHUB_TOKEN }}"
-          echo "something74"
+          echo "something79"
           echo "SHA: $GITHUB_SHA"
+          echo "SHORT: ${{ github.sha_short }}"
+          echo "SHORT from long: ${GITHUB_SHA::10}"
 
 
     - name: Install jq
@@ -29,12 +31,16 @@ jobs:
       run: |
           echo "vmType=$(jq -r '.vmType' config.json)" >> $GITHUB_ENV
           echo "contractAddress=$(jq -r '.contractAddress' config.json)" >> $GITHUB_ENV
+          echo "metricsAddress=$(jq -r '.metricsAddress' config.json)" >> $GITHUB_ENV
+          echo "port=$(jq -r '.port' config.json)" >> $GITHUB_ENV
+          
 
 
-    # - name: Use the JSON values
-    #   run: |
-    #       echo "Using vmType: $vmType"
-    #       echo "Using contractAddress: $contractAddress"
+
+    - name: Use the JSON values
+      run: |
+          echo "Using vmType: $vmType"
+          echo "Using contractAddress: $contractAddress"
 
 
     - name: Set up JDK 17
@@ -84,7 +90,7 @@ jobs:
     # - name: Make HTTP GET request with curl - to esm, for dependency check
     #   run: |
     #       echo 'starting curl'
-    #       BASE_URL="https://2b9c96b1370aa52a594af09b1132090a.serveo.net/blockchain/dependency-check"
+    #       BASE_URL="https://63b5e9a76ada208d08eb733c6682f603.serveo.net/blockchain/dependency-check"
     #       PARAMS=""
 
     #       echo 'before actual curl'
@@ -119,7 +125,7 @@ jobs:
       run: |
           echo 'entered depeloy step' 
           BASE_URL="https://7f1cc78c402320694de54807f4f2e3be.serveo.net/deploy"
-          PARAMS="?vmType=$vmType&repoUrl=https://github.com/$GITHUB_REPOSITORY.git&lastCommitHash=${GITHUB_SHA::10}&redeployment=false"
+          PARAMS="?vmType=$vmType&repoUrl=https://github.com/$GITHUB_REPOSITORY.git&lastCommitHash=${GITHUB_SHA::10}&redeployment=false&metricsAddress=${metricsAddress}&port=${port}"
 
           echo 'right before curl'
           RESPONSE=$(curl -s -o response.json -w "%{http_code}" "${BASE_URL}${PARAMS}")
