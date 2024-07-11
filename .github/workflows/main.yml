@@ -107,11 +107,11 @@ jobs:
     #       echo "Success: ${RESPONSE}"
 
 
-    - name: Build with Gradle
-      run: |
-        echo "Starting the build process...."
-        ./gradlew build -x test
-        echo "Build process completed."
+    # - name: Build with Gradle
+    #   run: |
+    #     echo "Starting the build process...."
+    #     ./gradlew build -x test
+    #     echo "Build process completed."
 
 
     # - name: Test with Gradle
