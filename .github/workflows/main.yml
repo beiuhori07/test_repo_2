@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  PUBLIC_URL: 'https://2b934df765214b997aad8d13c6c8e5d7.serveo.net'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -90,7 +93,7 @@ jobs:
     # - name: Make HTTP GET request with curl - to esm, for dependency check
     #   run: |
     #       echo 'starting curl'
-    #       BASE_URL="https://63b5e9a76ada208d08eb733c6682f603.serveo.net/blockchain/dependency-check"
+    #       BASE_URL="$PUBLIC_URL/blockchain/dependency-check"
     #       PARAMS=""
 
     #       echo 'before actual curl'
@@ -124,8 +127,8 @@ jobs:
     - name: Make HTTP GET request with curl - to esm, for deployment
       run: |
           echo 'entered depeloy step' 
-          BASE_URL="https://f592faf0cf40a69d3c38175fcf217c8a.serveo.net/deploy"
-          PARAMS="?vmType=$vmType&repoUrl=https://github.com/$GITHUB_REPOSITORY.git&lastCommitHash=${GITHUB_SHA::10}&redeployment=false&metricsAddress=${metricsAddress}&port=${port}&geolocation=germania"
+          BASE_URL="$PUBLIC_URL/deploy"
+          PARAMS="?vmType=$vmType&repoUrl=https://github.com/$GITHUB_REPOSITORY.git&lastCommitHash=${GITHUB_SHA::10}&redeployment=false&metricsAddress=${metricsAddress}&port=${port}&geolocation=germania&publicUrl=$PUBLIC_URL&contractAddress=${contractAddress}"
 
           echo 'right before curl'
           RESPONSE=$(curl -s -o response.json -w "%{http_code}" "${BASE_URL}${PARAMS}")
