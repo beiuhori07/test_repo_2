@@ -37,24 +37,24 @@ jobs:
 
 
 
-    - name: Use the JSON values
-      run: |
-          echo "Using vmType: $vmType"
-          echo "Using contractAddress: $contractAddress"
+    # - name: Use the JSON values
+    #   run: |
+    #       echo "Using vmType: $vmType"
+    #       echo "Using contractAddress: $contractAddress"
 
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin' # Temurin is the Eclipse Foundation's OpenJDK distribution
+    # - name: Set up JDK 17
+    #   uses: actions/setup-java@v2
+    #   with:
+    #     java-version: '17'
+    #     distribution: 'temurin' # Temurin is the Eclipse Foundation's OpenJDK distribution
 
    
-    - name: Grant execute permission for gradlew
-      run: |
-        echo "Before chmod on wrapper"
-        chmod +x ./gradlew
-        echo "After chmod on wrapper"
+    # - name: Grant execute permission for gradlew
+    #   run: |
+    #     echo "Before chmod on wrapper"
+    #     chmod +x ./gradlew
+    #     echo "After chmod on wrapper"
 
 
     # - name: Download dependencies
@@ -124,7 +124,7 @@ jobs:
     - name: Make HTTP GET request with curl - to esm, for deployment
       run: |
           echo 'entered depeloy step' 
-          BASE_URL="https://eda7417edc43225d726c260726e7a658.serveo.net/deploy"
+          BASE_URL="https://7cfa7f8892f00c3f50dfe5ea14ba606f.serveo.net/deploy"
           PARAMS="?vmType=$vmType&repoUrl=https://github.com/$GITHUB_REPOSITORY.git&lastCommitHash=${GITHUB_SHA::10}&redeployment=false&metricsAddress=${metricsAddress}&port=${port}&geolocation=germania"
 
           echo 'right before curl'
