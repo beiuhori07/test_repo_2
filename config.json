@@ -1,6 +1,6 @@
 {
   "vmType": "cpu",
   "port": 8080,
-  "contractAddress": "0xBb42ecE7629d9e9E33A97fc40dCoE77f42Eb9EF9B",
+  "contractAddress": "0x1b61c574a41ea0d1b670c0037ea39b5e9e792caf",
   "metricsAddress": "0xac8bfeffaaa90e092a7c4709a9cda36f9cdf9e03"
 }
